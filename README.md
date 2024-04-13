@@ -1,26 +1,6 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=anirbanpaulcom&label=Profile%20views&color=blueviolet&style=flat" alt="anirbanpaul" /> </p>
 
-```assembly
-section .data
-    intro db "Anirban Paul - Code Architect", 0
 
-section .text
-    global _start
-
-_start:
-    ; Display the introduction
-    mov eax, 4            ; sys_write
-    mov ebx, 1            ; stdout
-    mov ecx, intro        ; message
-    mov edx, 25           ; length
-    int 0x80              ; syscall
-
-    ; Exit program
-    mov eax, 1            ; sys_exit
-    xor ebx, ebx          ; exit code 0
-    int 0x80              ; syscall
-
-````
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: light)" srcset="github-snake.svg" />
