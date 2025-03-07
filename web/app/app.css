@@ -1,0 +1,350 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@tailwind utilities;
+@layer theme, base, components, utilities;
+
+@custom-variant light (&:where(.light, .light *));
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: white;
+    --foreground: black;
+    --bg-reverse: black;
+    --text-reverse: white;
+    --border-width: 1.2px;
+    --border-color: rgb(0 0 0 / 0.1);
+    --background-gray: rgb(0 0 0 / 0.03);
+    --text-gray: rgb(0 0 0 / 0.7);
+    --gradient-from: black;
+    --gradient-via: rgba(0, 0, 0, 0.8);
+    --gradient-to: #d3d3d3;
+  }
+  .dark {
+    --background: black;
+    --foreground: white;
+    --bg-reverse: white;
+    --text-reverse: black;
+    --border-width: 1.2px;
+    --border-color: rgb(255 255 255 / 0.1);
+    --background-gray: rgb(255 255 255 / 0.05);
+    --text-gray: rgb(255 255 255 / 0.7);
+    --gradient-from: #d3d3d3;
+    --gradient-via: #d3d3d3;
+    --gradient-to: #4b4b4b;
+  }
+
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    margin: 0;
+    padding: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @keyframes smoothTransform {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) skewX(0deg)
+        skewY(0deg);
+    }
+    100% {
+      transform: rotateX(30deg) rotateY(30deg) rotateZ(30deg) skewX(10deg)
+        skewY(10deg);
+    }
+  }
+
+  @keyframes enterFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes enterFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes exitToRight {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+  }
+
+  @keyframes exitToLeft {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: rotateX(-10deg) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: rotateX(0deg) scale(1);
+    }
+  }
+
+  @keyframes scaleOut {
+    from {
+      opacity: 1;
+      transform: rotateX(0deg) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: rotateX(-10deg) scale(0.95);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes slideUpAndFade {
+    0% {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideRightAndFade {
+    0% {
+      opacity: 0;
+      transform: translateX(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideDownAndFade {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideLeftAndFade {
+    0% {
+      opacity: 0;
+      transform: translateX(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 200ms ease;
+  }
+
+  .animate-scaleOut {
+    animation: scaleOut 200ms ease;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 200ms ease;
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 200ms ease;
+  }
+
+  .animate-enterFromLeft {
+    animation: enterFromLeft 250ms ease;
+  }
+
+  .animate-enterFromRight {
+    animation: enterFromRight 250ms ease;
+  }
+
+  .animate-exitToLeft {
+    animation: exitToLeft 250ms ease;
+  }
+
+  .animate-exitToRight {
+    animation: exitToRight 250ms ease;
+  }
+
+  .animate-marquee {
+    animation: marquee var(--duration) linear infinite;
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration) linear infinite;
+  }
+
+  .animate-slideUpAndFade {
+    animation: slideUpAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1);
+  }
+
+  .animate-slideDownAndFade {
+    animation: slideDownAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1);
+  }
+
+  .animate-slideRightAndFade {
+    animation: slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1);
+  }
+
+  .animate-slideLeftAndFade {
+    animation: slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1);
+  }
+
+  .text-color {
+    color: var(--foreground);
+  }
+
+  .hover\:text-color:hover {
+    color: var(--foreground);
+  }
+
+  .bg-color {
+    background: var(--background);
+  }
+
+  .hover\:bg-color:hover {
+    background: var(--background);
+  }
+
+  .text-reverse {
+    color: var(--text-reverse);
+  }
+
+  .hover\:text-reverse:hover {
+    color: var(--text-reverse);
+  }
+
+  .bg-reverse {
+    background: var(--bg-reverse);
+  }
+
+  .hover\:bg-reverse:hover {
+    background: var(--bg-reverse);
+  }
+
+  .border-on {
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .hover\:border-on:hover {
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .bg-gray {
+    background-color: var(--background-gray);
+  }
+
+  .hover\:bg-gray:hover {
+    background-color: var(--background-gray);
+  }
+
+  .text-gray {
+    color: var(--text-gray);
+  }
+
+  .hover\:text-gray:hover {
+    color: var(--text-gray);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      to bottom,
+      var(--gradient-from),
+      var(--gradient-via),
+      var(--gradient-to)
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient {
+    background: linear-gradient(
+      to right,
+      var(--gradient-from),
+      var(--gradient-via),
+      var(--gradient-to)
+    );
+  }
+}
