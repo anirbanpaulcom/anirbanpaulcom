@@ -116,7 +116,7 @@ export function Blog({
           ) : (
             allBlogs.map((b: BlogType) => (
               <BlogCard
-                link={`/blogs/${b.filename}`}
+                link={`/blog/${b.filename}`}
                 key={b.filename}
                 title={b.title}
                 content={b.description}

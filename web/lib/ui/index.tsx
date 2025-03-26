@@ -9,6 +9,7 @@ export * from './button';
 export * from './checkbox';
 export * from './copy-button';
 export * from './copy-text';
+export * from './cursor';
 export * from './file-upload';
 export * from './form';
 export * from './githubstar';

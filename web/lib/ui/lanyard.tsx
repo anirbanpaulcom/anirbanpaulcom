@@ -76,10 +76,6 @@ const SEGMENT_PROPS: RigidBodyProps = {
   linearDamping: 4,
 };
 
-// Optimized touch device detection
-function isTouchDevice() {
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
 export function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
@@ -144,7 +140,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
 
   // Load model based on theme
   const { nodes, materials } = useGLTF(
-    theme === 'light' ? 'idcardlight.glb' : 'idcarddark.glb',
+    theme === 'light' ? '/idcardlight.glb' : '/idcarddark.glb',
   ) as GLTFResult;
 
   const { width, height } = useThree((state) => state.size);
@@ -213,15 +209,17 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
 
   // Optimized animation frame update
   useFrame((state, delta) => {
-    if (!card.current) return;
+    if (
+      !card.current ||
+      !fixed.current ||
+      !j1.current ||
+      !j2.current ||
+      !j3.current
+    )
+      return;
 
     // Handle dragging
-    if (
-      dragged &&
-      dragged instanceof THREE.Vector3 &&
-      card.current &&
-      !isTouchDevice()
-    ) {
+    if (dragged && dragged instanceof THREE.Vector3 && card.current) {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
@@ -234,7 +232,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
       card.current.setNextKinematicTranslation(vec.sub(dragged));
     }
 
-    if (dragged && isTouchDevice() && card.current) {
+    if (dragged && card.current) {
       [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
     }
 
@@ -265,18 +263,22 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
         curve.points[3].copy(fixed.current.translation());
       }
 
-      // Update mesh line geometry
       if (band.current?.geometry) {
         const points = curve.getPoints(32);
-        if (
-          !points.some(
-            (point) => isNaN(point.x) || isNaN(point.y) || isNaN(point.z),
-          )
-        ) {
-          (band.current.geometry as MeshLineGeometry).setPoints(points);
+
+        const isValid = points.every(
+          (point) => !isNaN(point.x) && !isNaN(point.y) && !isNaN(point.z),
+        );
+
+        // Only update geometry if all points are valid
+        if (isValid) {
+          try {
+            (band.current.geometry as MeshLineGeometry).setPoints(points);
+          } catch (e) {
+            console.log(e);
+          }
         }
       }
-
       // Apply angular damping to card
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
@@ -406,5 +408,5 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
 }
 
 // Preload models to improve initial loading performance
-useGLTF.preload('idcardlight.glb');
-useGLTF.preload('idcarddark.glb');
+useGLTF.preload('/idcardlight.glb');
+useGLTF.preload('/idcarddark.glb');

@@ -34,6 +34,7 @@
 //       return;
 //     }
 //     // fire onClose event if provided
+//     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 //     onClose && onClose();
 
 //     // if setShowModal is defined, use it to close modal

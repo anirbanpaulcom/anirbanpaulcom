@@ -82,7 +82,19 @@ export const User: UserType = {
     'Linux Command Line',
   ],
   experiences: [],
-  blogs: [],
+  blogs: [
+    {
+      filename: 'sanjeevni',
+      title: 'Sanjeevni AI',
+      description:
+        'Sanjeevni AI uses AI to improve healthcare access in rural India through voice-first, multilingual health assessments, telemedicine, and education, empowering local healthcare workers and addressing key challenges.',
+      date: 'October 30, 2023, 12:00 PM',
+      category: 'Health',
+    },
+  ],
+  images: [
+    'https://github.com/user-attachments/assets/16ff28d4-b3b5-4425-b57b-8ad6465d7b71',
+  ],
   recommendations: [
     {
       name: 'Daniel Silva',

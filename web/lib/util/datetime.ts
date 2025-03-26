@@ -1,6 +1,6 @@
 export const getDateTimeLocal = (timestamp?: Date): string => {
   const d = timestamp ? new Date(timestamp) : new Date();
-  if (d.toString() === 'Invalid Date') return '';
+  if (d && d.toString() === 'Invalid Date') return '';
   return new Date(d.getTime() - d.getTimezoneOffset() * 60000)
     .toISOString()
     .split(':')
@@ -12,7 +12,7 @@ export const formatDate = (
   datetime: Date | string,
   options?: Intl.DateTimeFormatOptions,
 ) => {
-  if (datetime.toString() === 'Invalid Date') return '';
+  if (datetime && datetime.toString() === 'Invalid Date') return '';
   return new Date(datetime).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -26,7 +26,7 @@ export const formatDateTime = (
   datetime: Date | string,
   options?: Intl.DateTimeFormatOptions,
 ) => {
-  if (datetime.toString() === 'Invalid Date') return '';
+  if (datetime && datetime.toString() === 'Invalid Date') return '';
   return new Date(datetime).toLocaleTimeString('en-US', {
     month: 'short',
     day: 'numeric',

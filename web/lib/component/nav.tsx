@@ -123,7 +123,7 @@ export function Nav() {
       <Scroller />
       <motion.nav
         ref={containerRef}
-        className="fixed bottom-8 left-0 right-0 mx-auto p-2 z-50 flex justify-between items-center overflow-hidden border-on backdrop-blur-md rounded-2xl shadow-lg"
+        className="fixed bottom-5 left-0 right-0 mx-auto p-2 z-50 flex justify-between items-center overflow-hidden border-on backdrop-blur-md rounded-2xl shadow-lg"
         animate={{ width: onMore ? '300px' : '180px' }}
         initial={false}
       >

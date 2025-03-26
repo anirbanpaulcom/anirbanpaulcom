@@ -9,4 +9,4 @@ export * from './splitscreen/contact';
 export * from './splitscreen/blog';
 export * from './splitscreen/experience';
 export * from './splitscreen/review';
-export * from './splitscreen/blogdetails';
+export * from './splitscreen/gallery';

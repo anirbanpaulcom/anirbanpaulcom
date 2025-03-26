@@ -7,6 +7,7 @@ import {
   Review,
   Blog,
   Experience,
+  Gallery,
 } from '@/lib/component';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <About />
       <Contact />
       <Experience />
+      <Gallery />
       <Blog />
       <Review />
     </Container>

@@ -12,9 +12,11 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    minimumCacheTTL: 31536000,
   },
   experimental: {
     mdxRs: true,
+    viewTransition: true,
   },
 };
 

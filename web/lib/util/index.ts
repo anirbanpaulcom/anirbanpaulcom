@@ -20,3 +20,4 @@ export * from './stable-sort';
 export * from './trim';
 export * from './truncate';
 export * from './color';
+export * from './get-slug';

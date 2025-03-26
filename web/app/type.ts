@@ -35,5 +35,6 @@ export interface UserType {
   skills: string[];
   experiences: ExperienceType[];
   blogs: BlogType[];
+  images: string[];
   recommendations: RecommendationType[];
 }
